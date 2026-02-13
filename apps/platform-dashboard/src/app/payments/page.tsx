@@ -32,12 +32,32 @@ const columns: Array<ColumnDef<PaymentRow>> = [
 ];
 
 export default function PaymentsPage() {
+  const pabVolume = payments.filter((row) => row.currency === "PAB").reduce((sum, row) => sum + row.amountCents, 0n);
+  const succeeded = payments.filter((row) => row.status === "succeeded").length;
+  const failed = payments.filter((row) => row.status === "failed").length;
+
   return (
     <main className="orq-page">
       <DashboardNav />
       <section className="orq-container">
-        <h1 className="text-2xl font-semibold text-slate-100">Payments</h1>
-        <p className="mb-6 text-sm text-slate-400">Payment intent lifecycle and execution status.</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-stone-950">Payments</h1>
+        <p className="mb-6 text-sm text-stone-600">Intent lifecycle, conversion health, and execution status.</p>
+
+        <div className="mb-6 grid gap-3 sm:grid-cols-3">
+          <div className="orq-card">
+            <p className="text-xs uppercase tracking-wide text-stone-500">PAB intent volume</p>
+            <p className="mt-1 text-lg font-semibold text-stone-950">{formatMoney(pabVolume, "PAB")}</p>
+          </div>
+          <div className="orq-card">
+            <p className="text-xs uppercase tracking-wide text-stone-500">Succeeded</p>
+            <p className="mt-1 text-lg font-semibold text-stone-950">{succeeded}</p>
+          </div>
+          <div className="orq-card">
+            <p className="text-xs uppercase tracking-wide text-stone-500">Failed</p>
+            <p className="mt-1 text-lg font-semibold text-stone-950">{failed}</p>
+          </div>
+        </div>
+
         <DataTable columns={columns} data={payments} caption="Payments" emptyMessage="No payments recorded." />
       </section>
     </main>

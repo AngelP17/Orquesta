@@ -9,8 +9,8 @@ const instrumentSerif = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Orquesta - Platform Dashboard",
-  description: "Admin dashboard for Orquesta payment orchestration platform",
+  title: "Orquesta Control Center",
+  description: "High-fidelity operations workspace for Panama payment orchestration.",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={instrumentSerif.variable}>
-      <body className="bg-[#04070f] font-sans antialiased text-slate-100">{children}</body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

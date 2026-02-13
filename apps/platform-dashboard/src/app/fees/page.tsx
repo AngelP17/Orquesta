@@ -7,22 +7,39 @@ const sweeps = [
 ];
 
 export default function FeesPage() {
+  const sweptCount = sweeps.filter((sweep) => sweep.status === "swept").length;
+
   return (
     <main className="orq-page">
       <DashboardNav />
       <section className="orq-container max-w-5xl">
-        <h1 className="text-2xl font-semibold text-slate-100">Fee Sweeps</h1>
-        <p className="mb-6 text-sm text-slate-400">Hourly fee obligation settlement and ITBMS accrual.</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-stone-950">Fee Sweeps</h1>
+        <p className="mb-6 text-sm text-stone-600">Hourly obligation settlement and ITBMS accrual integrity.</p>
+
+        <div className="mb-6 grid gap-3 sm:grid-cols-3">
+          <div className="orq-card">
+            <p className="text-xs uppercase tracking-wide text-stone-500">Cycles today</p>
+            <p className="mt-1 text-lg font-semibold text-stone-950">{sweeps.length}</p>
+          </div>
+          <div className="orq-card">
+            <p className="text-xs uppercase tracking-wide text-stone-500">Completed sweeps</p>
+            <p className="mt-1 text-lg font-semibold text-stone-950">{sweptCount}</p>
+          </div>
+          <div className="orq-card">
+            <p className="text-xs uppercase tracking-wide text-stone-500">Pending attention</p>
+            <p className="mt-1 text-lg font-semibold text-stone-950">{sweeps.length - sweptCount}</p>
+          </div>
+        </div>
 
         <div className="orq-surface orq-glow">
           <ul className="space-y-3">
             {sweeps.map((sweep) => (
               <li key={sweep.id} className="orq-card flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="font-semibold text-slate-100">{sweep.id}</p>
-                  <p className="text-sm text-slate-400">Seller {sweep.seller}</p>
+                  <p className="font-semibold text-stone-950">{sweep.id}</p>
+                  <p className="text-sm text-stone-600">Seller {sweep.seller}</p>
                 </div>
-                <p className="text-sm text-slate-300">Fees {sweep.fees} | ITBMS {sweep.itbms}</p>
+                <p className="text-sm text-stone-700">Fees {sweep.fees} | ITBMS {sweep.itbms}</p>
                 <span className={sweep.status === "swept" ? "orq-badge-success" : "orq-badge-warning"}>{sweep.status}</span>
               </li>
             ))}

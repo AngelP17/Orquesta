@@ -1,1 +1,1 @@
-export { default as DashboardNav } from "./components/DashboardNav";
+export { DashboardNav } from './components/DashboardNav';

@@ -9,14 +9,10 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: [
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
+          "Satoshi",
+          "Avenir Next",
+          "Neue Haas Grotesk Text Pro",
           "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "Noto Sans",
           "sans-serif",
         ],
         serif: ["var(--font-instrument-serif)", "serif"],

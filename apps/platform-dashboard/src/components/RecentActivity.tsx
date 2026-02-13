@@ -8,18 +8,21 @@ const activities = [
 
 export function RecentActivity() {
   return (
-    <div className="divide-y divide-slate-800/90">
+    <div className="divide-y divide-[#7f240e]/14">
       {activities.map((activity) => (
-        <div key={activity.id} className="flex flex-col gap-3 px-6 py-4 transition hover:bg-slate-900/65 sm:flex-row sm:items-center sm:justify-between">
+        <div
+          key={activity.id}
+          className="flex flex-col gap-3 px-6 py-4 transition hover:bg-[#b7855f]/10 sm:flex-row sm:items-center sm:justify-between"
+        >
           <div className="flex items-center gap-3">
             <ActivityIcon type={activity.type} status={activity.status} />
             <div>
-              <p className="text-sm font-medium text-slate-100">{activity.description}</p>
-              <p className="text-xs text-slate-500">{activity.time}</p>
+              <p className="text-sm font-medium text-stone-900">{activity.description}</p>
+              <p className="text-xs text-stone-500">{activity.time}</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-sm font-medium text-slate-100">{activity.amount}</p>
+            <p className="text-sm font-medium text-stone-900">{activity.amount}</p>
             <StatusBadge status={activity.status} />
           </div>
         </div>

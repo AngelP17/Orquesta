@@ -1,0 +1,54 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orquesta
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - '6379:6379'
+
+  yappy-mock:
+    build:
+      context: .
+      dockerfile: services/yappy-mock/Dockerfile
+    command: pnpm --filter @orquesta/yappy-mock dev
+    ports:
+      - '4010:4010'
+
+  paycaddy-mock:
+    build:
+      context: .
+      dockerfile: services/paycaddy-mock/Dockerfile
+    command: pnpm --filter @orquesta/paycaddy-mock dev
+    ports:
+      - '4020:4020'
+
+  api:
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+    command: pnpm --filter @orquesta/api dev
+    environment:
+      STORAGE_BACKEND: postgres
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/orquesta
+      YAPPY_BASE_URL: http://yappy-mock:4010
+      PAYCADDY_BASE_URL: http://paycaddy-mock:4020
+    ports:
+      - '3002:3002'
+    depends_on:
+      - postgres
+      - redis
+      - yappy-mock
+      - paycaddy-mock
+
+volumes:
+  postgres_data:

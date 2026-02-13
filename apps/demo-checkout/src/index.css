@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --checkout-bg-a: #f8fafc;
+  --checkout-bg-b: #ecfeff;
+}
+
+@layer base {
+  html {
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 20% 0%, #dbeafe 0%, transparent 40%),
+      radial-gradient(circle at 80% 10%, #ccfbf1 0%, transparent 35%),
+      linear-gradient(180deg, var(--checkout-bg-b), var(--checkout-bg-a));
+  }
+}
+
+@layer components {
+  .orquesta-checkout-widget {
+    @apply mx-auto w-full max-w-md;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

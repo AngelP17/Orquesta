@@ -1,0 +1,78 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build all packages
+        run: pnpm build
+
+      - name: Build API Docker image
+        run: docker build -f services/api/Dockerfile -t orquesta-api:${{ github.sha }} .
+
+      - name: Deploy API to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
+        run: |
+          npx @railway/cli up --service $RAILWAY_SERVICE_ID --detach
+
+      - name: Deploy frontends to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID_DASHBOARD: ${{ secrets.VERCEL_PROJECT_ID_DASHBOARD }}
+          VERCEL_PROJECT_ID_PORTAL: ${{ secrets.VERCEL_PROJECT_ID_PORTAL }}
+        run: |
+          pnpm dlx vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+          pnpm dlx vercel deploy --prod --token "$VERCEL_TOKEN"
+
+      - name: Shift canary traffic to 5%
+        run: |
+          echo "Canary shift to 5% for 30 minutes (platform-specific rollout command goes here)"
+
+      - name: Hold canary window
+        run: sleep 1800
+
+      - name: Canary health check (rollback when error rate >1%)
+        env:
+          CANARY_ERROR_RATE_URL: ${{ secrets.CANARY_ERROR_RATE_URL }}
+        run: .github/scripts/canary-check.sh
+
+      - name: Rollback deployment
+        if: failure()
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
+        run: |
+          echo "Canary failed; rolling back"
+          npx @railway/cli rollback --service $RAILWAY_SERVICE_ID
+
+      - name: Promote canary to 100%
+        if: success()
+        run: |
+          echo "Promote to 100% traffic"

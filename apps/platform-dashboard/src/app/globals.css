@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --orq-bg: #04070f;
-  --orq-bg-soft: #091120;
-  --orq-panel: rgba(8, 16, 31, 0.78);
-  --orq-panel-solid: #0b1426;
-  --orq-border: rgba(56, 189, 248, 0.24);
-  --orq-border-strong: rgba(56, 189, 248, 0.4);
-  --orq-text: #e6edf8;
-  --orq-muted: #8aa3c7;
-  --orq-accent: #22d3ee;
-  --orq-accent-strong: #0ea5e9;
-  --orq-success: #34d399;
-  --orq-warning: #facc15;
-  --orq-danger: #fb7185;
-  --orq-alert: #fb923c;
+  --orq-bg: #f6efe5;
+  --orq-bg-soft: #f0e1cc;
+  --orq-panel: rgba(255, 251, 244, 0.82);
+  --orq-panel-solid: #fff8ef;
+  --orq-border: rgba(54, 30, 21, 0.16);
+  --orq-border-strong: rgba(120, 55, 36, 0.28);
+  --orq-text: #23140f;
+  --orq-muted: #715d50;
+  --orq-accent: #b74d26;
+  --orq-accent-strong: #7f240e;
+  --orq-success: #0f7f53;
+  --orq-warning: #9a6a0f;
+  --orq-danger: #b42334;
+  --orq-alert: #b85b1c;
 }
 
 html,
@@ -25,11 +25,31 @@ body {
 }
 
 body {
+  position: relative;
   color: var(--orq-text);
+  font-family: "Avenir Next", "Neue Haas Grotesk Text Pro", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at 14% -6%, rgba(56, 189, 248, 0.24) 0%, transparent 42%),
-    radial-gradient(circle at 86% 8%, rgba(59, 130, 246, 0.16) 0%, transparent 38%),
-    linear-gradient(180deg, #081021 0%, #04070f 48%, #03050c 100%);
+    radial-gradient(circle at 8% -8%, rgba(224, 102, 40, 0.26) 0%, transparent 38%),
+    radial-gradient(circle at 92% 12%, rgba(28, 117, 105, 0.16) 0%, transparent 42%),
+    radial-gradient(circle at 52% 108%, rgba(171, 64, 39, 0.16) 0%, transparent 42%),
+    linear-gradient(160deg, #f8f1e8 0%, #f0e3d2 54%, #ebdcc8 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      120deg,
+      rgba(44, 24, 17, 0.03) 0,
+      rgba(44, 24, 17, 0.03) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+  mix-blend-mode: multiply;
+  opacity: 0.28;
 }
 
 @layer components {
@@ -38,27 +58,27 @@ body {
   }
 
   .orq-container {
-    @apply mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8;
   }
 
   .orq-surface {
-    @apply rounded-2xl border p-6 shadow-xl;
+    @apply rounded-3xl border p-6 shadow-xl;
     background: var(--orq-panel);
     border-color: var(--orq-border);
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(12px);
   }
 
   .orq-card {
-    @apply rounded-xl border p-4;
-    background: rgba(6, 12, 24, 0.74);
-    border-color: rgba(71, 85, 105, 0.72);
+    @apply rounded-2xl border p-4;
+    background: rgba(255, 255, 255, 0.72);
+    border-color: rgba(105, 70, 53, 0.2);
     transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
 
   .orq-card:hover {
     transform: translateY(-1px);
-    border-color: rgba(56, 189, 248, 0.36);
-    box-shadow: 0 20px 40px rgba(2, 6, 23, 0.48);
+    border-color: var(--orq-border-strong);
+    box-shadow: 0 16px 28px rgba(55, 25, 16, 0.12);
   }
 
   .orq-card-header {
@@ -66,7 +86,7 @@ body {
   }
 
   .orq-title {
-    @apply text-3xl font-semibold tracking-tight md:text-5xl;
+    @apply text-4xl font-semibold leading-tight tracking-tight md:text-6xl;
     color: var(--orq-text);
   }
 
@@ -77,9 +97,9 @@ body {
 
   .orq-kicker {
     @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em];
-    border-color: rgba(34, 211, 238, 0.34);
-    color: #9befff;
-    background: rgba(12, 74, 110, 0.3);
+    border-color: rgba(127, 36, 14, 0.32);
+    color: #6f200f;
+    background: rgba(255, 233, 210, 0.72);
   }
 
   .orq-muted {
@@ -87,14 +107,15 @@ body {
   }
 
   .orq-section-title {
-    @apply text-xl font-semibold tracking-tight text-slate-100 md:text-2xl;
+    @apply text-xl font-semibold tracking-tight md:text-2xl;
+    color: var(--orq-text);
   }
 
   .orq-glow {
     box-shadow:
-      0 0 0 1px rgba(56, 189, 248, 0.14),
-      0 20px 40px rgba(3, 7, 18, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      0 0 0 1px rgba(120, 55, 36, 0.08),
+      0 22px 34px rgba(49, 27, 18, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.36);
   }
 
   .orq-badge {
@@ -103,62 +124,64 @@ body {
 
   .orq-badge-success {
     @apply orq-badge;
-    color: #b9f8dd;
-    background: rgba(52, 211, 153, 0.14);
-    border-color: rgba(52, 211, 153, 0.34);
+    color: #065f46;
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(15, 127, 83, 0.34);
   }
 
   .orq-badge-warning {
     @apply orq-badge;
-    color: #fef08a;
-    background: rgba(250, 204, 21, 0.14);
-    border-color: rgba(250, 204, 21, 0.34);
+    color: #7c5512;
+    background: rgba(245, 158, 11, 0.14);
+    border-color: rgba(154, 106, 15, 0.34);
   }
 
   .orq-badge-danger {
     @apply orq-badge;
-    color: #fecdd3;
-    background: rgba(251, 113, 133, 0.14);
-    border-color: rgba(251, 113, 133, 0.34);
+    color: #8b1d29;
+    background: rgba(239, 68, 68, 0.14);
+    border-color: rgba(180, 35, 52, 0.34);
   }
 
   .orq-badge-alert {
     @apply orq-badge;
-    color: #fed7aa;
-    background: rgba(251, 146, 60, 0.14);
-    border-color: rgba(251, 146, 60, 0.34);
+    color: #8d3a17;
+    background: rgba(234, 88, 12, 0.14);
+    border-color: rgba(184, 91, 28, 0.34);
   }
 
   .orq-badge-info {
     @apply orq-badge;
-    color: #bae6fd;
-    background: rgba(56, 189, 248, 0.14);
-    border-color: rgba(56, 189, 248, 0.34);
+    color: #5a3424;
+    background: rgba(120, 55, 36, 0.12);
+    border-color: rgba(120, 55, 36, 0.26);
   }
 
   .orq-btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-slate-950 transition;
-    background: linear-gradient(120deg, var(--orq-accent), #67e8f9);
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition;
+    color: #fff7f0;
+    background: linear-gradient(120deg, var(--orq-accent), #cf6d3a);
   }
 
   .orq-btn-primary:hover {
-    filter: brightness(1.06);
+    filter: brightness(1.04);
   }
 
   .orq-btn-secondary {
-    @apply inline-flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-semibold text-slate-200 transition;
-    border-color: rgba(100, 116, 139, 0.72);
-    background: rgba(15, 23, 42, 0.62);
+    @apply inline-flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-semibold transition;
+    color: #3c251a;
+    border-color: rgba(120, 55, 36, 0.32);
+    background: rgba(255, 246, 235, 0.72);
   }
 
   .orq-btn-secondary:hover {
-    border-color: rgba(56, 189, 248, 0.34);
-    color: #f8fafc;
-    background: rgba(15, 23, 42, 0.86);
+    border-color: rgba(120, 55, 36, 0.42);
+    color: #23140f;
+    background: rgba(255, 241, 224, 0.92);
   }
 
   .orq-fade-up {
-    animation: orqFadeUp 420ms ease-out;
+    animation: orqFadeUp 460ms cubic-bezier(0.2, 0.78, 0.2, 1) both;
   }
 }
 
@@ -176,24 +199,24 @@ body {
 
 @keyframes orqGlowShift {
   0% {
-    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.16), 0 16px 36px rgba(2, 6, 23, 0.46);
+    box-shadow: 0 0 0 1px rgba(120, 55, 36, 0.14), 0 16px 28px rgba(56, 26, 17, 0.12);
   }
 
   50% {
-    box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.24), 0 20px 44px rgba(2, 6, 23, 0.52);
+    box-shadow: 0 0 0 1px rgba(183, 77, 38, 0.2), 0 22px 34px rgba(56, 26, 17, 0.16);
   }
 
   100% {
-    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.16), 0 16px 36px rgba(2, 6, 23, 0.46);
+    box-shadow: 0 0 0 1px rgba(120, 55, 36, 0.14), 0 16px 28px rgba(56, 26, 17, 0.12);
   }
 }
 
 @keyframes orqRowPulse {
   0% {
-    background-color: rgba(30, 41, 59, 0.14);
+    background-color: rgba(191, 149, 123, 0.12);
   }
 
   100% {
-    background-color: rgba(51, 65, 85, 0.22);
+    background-color: rgba(163, 108, 79, 0.18);
   }
 }
