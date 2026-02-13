@@ -60,8 +60,8 @@ export function DashboardNav({
             href="/"
             className="group flex items-center gap-3 rounded-lg px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
           >
-            <div className="grid h-9 w-9 place-items-center rounded-xl border border-cyan-300/35 bg-gradient-to-br from-cyan-200 to-sky-400 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/25 transition group-hover:brightness-105">
-              O
+            <div className="grid h-9 w-9 place-items-center overflow-hidden rounded-xl border border-cyan-300/35 bg-slate-950 shadow-lg shadow-cyan-500/25 transition group-hover:brightness-105">
+              <img src="/logo.png" alt="Orquesta logo" className="h-full w-full object-cover" />
             </div>
             <span className="text-base font-semibold tracking-tight text-slate-100 sm:text-lg">{brandLabel}</span>
           </a>
