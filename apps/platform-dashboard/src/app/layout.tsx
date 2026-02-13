@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={instrumentSerif.variable}>
-      <body className="font-serif antialiased">{children}</body>
+      <body className="bg-[#04070f] font-sans antialiased text-slate-100">{children}</body>
     </html>
   );
 }
