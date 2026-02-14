@@ -18,7 +18,7 @@ const columns: Array<ColumnDef<SellerRow>> = [
     header: "Seller",
     accessorKey: "legalName",
     cell: ({ row }) => (
-      <Link className="font-medium text-[#7f240e] transition hover:text-[#5f1d0d] hover:underline" href={`/sellers/${row.original.id}`}>
+      <Link className="font-medium text-primary transition hover:text-primary/80 hover:underline" href={`/sellers/${row.original.id}`}>
         {row.original.legalName}
       </Link>
     ),
@@ -50,22 +50,22 @@ export default function SellersPage() {
       <DashboardNav />
       <section className="orq-container">
         <div className="mb-6 space-y-2">
-          <h1 className="text-3xl font-semibold tracking-tight text-stone-950">Sellers</h1>
-          <p className="text-sm text-stone-600">Risk tiers, exposure, and liquidity posture across your merchant base.</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground">Sellers</h1>
+          <p className="text-sm text-muted-foreground">Risk tiers, exposure, and liquidity posture across your merchant base.</p>
         </div>
 
         <div className="mb-6 grid gap-3 sm:grid-cols-3">
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">Active sellers</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{sellers.length}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Active sellers</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{sellers.length}</p>
           </div>
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">Combined balance</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{formatMoney(totalBalance, "PAB")}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Combined balance</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{formatMoney(totalBalance, "PAB")}</p>
           </div>
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">Manual review</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{highRisk} sellers</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Manual review</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{highRisk} sellers</p>
           </div>
         </div>
 

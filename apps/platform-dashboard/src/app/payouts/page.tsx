@@ -41,21 +41,21 @@ export default function PayoutsPage() {
     <main className="orq-page">
       <DashboardNav />
       <section className="orq-container">
-        <h1 className="text-3xl font-semibold tracking-tight text-stone-950">Payouts</h1>
-        <p className="mb-6 text-sm text-stone-600">Batch execution, settlement confidence, and payout completion flow.</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-foreground">Payouts</h1>
+        <p className="mb-6 text-sm text-muted-foreground">Batch execution, settlement confidence, and payout completion flow.</p>
 
         <div className="mb-6 grid gap-3 sm:grid-cols-3">
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">PAB batch volume</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{formatMoney(payoutVolume, "PAB")}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">PAB batch volume</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{formatMoney(payoutVolume, "PAB")}</p>
           </div>
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">Paid batches</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{paidCount}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Paid batches</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{paidCount}</p>
           </div>
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">In progress</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{processingCount}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">In progress</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{processingCount}</p>
           </div>
         </div>
 

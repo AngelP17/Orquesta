@@ -3,20 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --orq-bg: #f6efe5;
-  --orq-bg-soft: #f0e1cc;
-  --orq-panel: rgba(255, 251, 244, 0.82);
-  --orq-panel-solid: #fff8ef;
-  --orq-border: rgba(54, 30, 21, 0.16);
-  --orq-border-strong: rgba(120, 55, 36, 0.28);
-  --orq-text: #23140f;
-  --orq-muted: #715d50;
-  --orq-accent: #b74d26;
-  --orq-accent-strong: #7f240e;
-  --orq-success: #0f7f53;
-  --orq-warning: #9a6a0f;
-  --orq-danger: #b42334;
-  --orq-alert: #b85b1c;
+  --background: 34 45% 94%;
+  --foreground: 16 39% 10%;
+  --card: 35 60% 96%;
+  --card-foreground: 16 39% 10%;
+  --primary: 20 66% 43%;
+  --primary-foreground: 35 100% 97%;
+  --muted: 33 39% 88%;
+  --muted-foreground: 22 17% 38%;
+  --border: 22 28% 73%;
+  --ring: 20 66% 43%;
+  --success: 158 78% 28%;
+  --warning: 40 82% 35%;
+  --danger: 353 68% 42%;
+  --radius: 16px;
+
+  --orq-bg: hsl(var(--background));
+  --orq-bg-soft: hsl(var(--muted));
+  --orq-panel: hsl(var(--card) / 0.86);
+  --orq-panel-solid: hsl(var(--card));
+  --orq-border: hsl(var(--border) / 0.65);
+  --orq-border-strong: hsl(var(--border));
+  --orq-text: hsl(var(--foreground));
+  --orq-muted: hsl(var(--muted-foreground));
+  --orq-accent: hsl(var(--primary));
+  --orq-accent-strong: hsl(var(--primary) / 0.8);
+  --orq-success: hsl(var(--success));
+  --orq-warning: hsl(var(--warning));
+  --orq-danger: hsl(var(--danger));
+  --orq-alert: hsl(var(--primary));
 }
 
 html,
@@ -29,10 +44,10 @@ body {
   color: var(--orq-text);
   font-family: "Avenir Next", "Neue Haas Grotesk Text Pro", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at 8% -8%, rgba(224, 102, 40, 0.26) 0%, transparent 38%),
-    radial-gradient(circle at 92% 12%, rgba(28, 117, 105, 0.16) 0%, transparent 42%),
-    radial-gradient(circle at 52% 108%, rgba(171, 64, 39, 0.16) 0%, transparent 42%),
-    linear-gradient(160deg, #f8f1e8 0%, #f0e3d2 54%, #ebdcc8 100%);
+    radial-gradient(circle at 8% -8%, hsl(var(--primary) / 0.2) 0%, transparent 38%),
+    radial-gradient(circle at 92% 12%, hsl(170 47% 35% / 0.16) 0%, transparent 42%),
+    radial-gradient(circle at 52% 108%, hsl(var(--primary) / 0.16) 0%, transparent 42%),
+    linear-gradient(160deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
 }
 
 body::before {
@@ -43,8 +58,8 @@ body::before {
   background:
     repeating-linear-gradient(
       120deg,
-      rgba(44, 24, 17, 0.03) 0,
-      rgba(44, 24, 17, 0.03) 1px,
+      hsl(var(--foreground) / 0.03) 0,
+      hsl(var(--foreground) / 0.03) 1px,
       transparent 1px,
       transparent 14px
     );
@@ -53,16 +68,11 @@ body::before {
 }
 
 @layer components {
-  .orq-page {
-    @apply min-h-screen;
-  }
-
-  .orq-container {
-    @apply mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8;
-  }
+  .orq-page { @apply min-h-screen; }
+  .orq-container { @apply mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8; }
 
   .orq-surface {
-    @apply rounded-3xl border p-6 shadow-xl;
+    @apply rounded-[var(--radius)] border p-6 shadow-xl;
     background: var(--orq-panel);
     border-color: var(--orq-border);
     backdrop-filter: blur(12px);
@@ -70,153 +80,44 @@ body::before {
 
   .orq-card {
     @apply rounded-2xl border p-4;
-    background: rgba(255, 255, 255, 0.72);
-    border-color: rgba(105, 70, 53, 0.2);
+    background: hsl(var(--card) / 0.75);
+    border-color: hsl(var(--border) / 0.75);
     transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
 
   .orq-card:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     border-color: var(--orq-border-strong);
-    box-shadow: 0 16px 28px rgba(55, 25, 16, 0.12);
-  }
-
-  .orq-card-header {
-    @apply mb-4 flex items-center justify-between gap-4;
-  }
-
-  .orq-title {
-    @apply text-4xl font-semibold leading-tight tracking-tight md:text-6xl;
-    color: var(--orq-text);
-  }
-
-  .orq-subtitle {
-    @apply mt-3 max-w-3xl text-sm leading-relaxed md:text-base;
-    color: var(--orq-muted);
+    box-shadow: 0 18px 28px hsl(var(--primary) / 0.14);
   }
 
   .orq-kicker {
     @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em];
-    border-color: rgba(127, 36, 14, 0.32);
-    color: #6f200f;
-    background: rgba(255, 233, 210, 0.72);
-  }
-
-  .orq-muted {
-    color: var(--orq-muted);
-  }
-
-  .orq-section-title {
-    @apply text-xl font-semibold tracking-tight md:text-2xl;
-    color: var(--orq-text);
+    border-color: hsl(var(--border));
+    color: hsl(var(--primary));
+    background: hsl(var(--card));
   }
 
   .orq-glow {
     box-shadow:
-      0 0 0 1px rgba(120, 55, 36, 0.08),
-      0 22px 34px rgba(49, 27, 18, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.36);
+      0 0 0 1px hsl(var(--border) / 0.35),
+      0 20px 32px hsl(var(--foreground) / 0.08),
+      inset 0 1px 0 hsl(0 0% 100% / 0.38);
   }
 
-  .orq-badge {
-    @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold uppercase tracking-wide;
-  }
+  .orq-badge { @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold uppercase tracking-wide; }
+  .orq-badge-success { @apply orq-badge; color: hsl(var(--success)); background: hsl(var(--success) / 0.13); border-color: hsl(var(--success) / 0.4); }
+  .orq-badge-warning { @apply orq-badge; color: hsl(var(--warning)); background: hsl(var(--warning) / 0.13); border-color: hsl(var(--warning) / 0.4); }
+  .orq-badge-danger { @apply orq-badge; color: hsl(var(--danger)); background: hsl(var(--danger) / 0.13); border-color: hsl(var(--danger) / 0.4); }
+  .orq-badge-alert { @apply orq-badge; color: hsl(var(--primary)); background: hsl(var(--primary) / 0.13); border-color: hsl(var(--primary) / 0.4); }
+  .orq-badge-info { @apply orq-badge; color: hsl(var(--muted-foreground)); background: hsl(var(--muted)); border-color: hsl(var(--border)); }
 
-  .orq-badge-success {
-    @apply orq-badge;
-    color: #065f46;
-    background: rgba(16, 185, 129, 0.14);
-    border-color: rgba(15, 127, 83, 0.34);
-  }
+  .orq-btn-primary { @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition; color: hsl(var(--primary-foreground)); background: linear-gradient(120deg, hsl(var(--primary)), hsl(var(--primary) / 0.82)); }
+  .orq-btn-primary:hover { filter: brightness(1.06); }
+  .orq-btn-secondary { @apply inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-semibold transition; color: hsl(var(--foreground)); border-color: hsl(var(--border)); background: hsl(var(--card)); }
 
-  .orq-badge-warning {
-    @apply orq-badge;
-    color: #7c5512;
-    background: rgba(245, 158, 11, 0.14);
-    border-color: rgba(154, 106, 15, 0.34);
-  }
-
-  .orq-badge-danger {
-    @apply orq-badge;
-    color: #8b1d29;
-    background: rgba(239, 68, 68, 0.14);
-    border-color: rgba(180, 35, 52, 0.34);
-  }
-
-  .orq-badge-alert {
-    @apply orq-badge;
-    color: #8d3a17;
-    background: rgba(234, 88, 12, 0.14);
-    border-color: rgba(184, 91, 28, 0.34);
-  }
-
-  .orq-badge-info {
-    @apply orq-badge;
-    color: #5a3424;
-    background: rgba(120, 55, 36, 0.12);
-    border-color: rgba(120, 55, 36, 0.26);
-  }
-
-  .orq-btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition;
-    color: #fff7f0;
-    background: linear-gradient(120deg, var(--orq-accent), #cf6d3a);
-  }
-
-  .orq-btn-primary:hover {
-    filter: brightness(1.04);
-  }
-
-  .orq-btn-secondary {
-    @apply inline-flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-semibold transition;
-    color: #3c251a;
-    border-color: rgba(120, 55, 36, 0.32);
-    background: rgba(255, 246, 235, 0.72);
-  }
-
-  .orq-btn-secondary:hover {
-    border-color: rgba(120, 55, 36, 0.42);
-    color: #23140f;
-    background: rgba(255, 241, 224, 0.92);
-  }
-
-  .orq-fade-up {
-    animation: orqFadeUp 460ms cubic-bezier(0.2, 0.78, 0.2, 1) both;
-  }
+  .orq-fade-up { animation: orqFadeUp 220ms ease-out both; }
 }
 
-@keyframes orqFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes orqGlowShift {
-  0% {
-    box-shadow: 0 0 0 1px rgba(120, 55, 36, 0.14), 0 16px 28px rgba(56, 26, 17, 0.12);
-  }
-
-  50% {
-    box-shadow: 0 0 0 1px rgba(183, 77, 38, 0.2), 0 22px 34px rgba(56, 26, 17, 0.16);
-  }
-
-  100% {
-    box-shadow: 0 0 0 1px rgba(120, 55, 36, 0.14), 0 16px 28px rgba(56, 26, 17, 0.12);
-  }
-}
-
-@keyframes orqRowPulse {
-  0% {
-    background-color: rgba(191, 149, 123, 0.12);
-  }
-
-  100% {
-    background-color: rgba(163, 108, 79, 0.18);
-  }
-}
+@keyframes orqFadeUp { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes orqRowPulse { 0% { background-color: hsl(var(--primary) / 0.06);} 100% { background-color: hsl(var(--primary) / 0.12);} }

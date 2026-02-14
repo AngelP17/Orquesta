@@ -40,21 +40,21 @@ export default function PaymentsPage() {
     <main className="orq-page">
       <DashboardNav />
       <section className="orq-container">
-        <h1 className="text-3xl font-semibold tracking-tight text-stone-950">Payments</h1>
-        <p className="mb-6 text-sm text-stone-600">Intent lifecycle, conversion health, and execution status.</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-foreground">Payments</h1>
+        <p className="mb-6 text-sm text-muted-foreground">Intent lifecycle, conversion health, and execution status.</p>
 
         <div className="mb-6 grid gap-3 sm:grid-cols-3">
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">PAB intent volume</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{formatMoney(pabVolume, "PAB")}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">PAB intent volume</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{formatMoney(pabVolume, "PAB")}</p>
           </div>
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">Succeeded</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{succeeded}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Succeeded</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{succeeded}</p>
           </div>
           <div className="orq-card">
-            <p className="text-xs uppercase tracking-wide text-stone-500">Failed</p>
-            <p className="mt-1 text-lg font-semibold text-stone-950">{failed}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Failed</p>
+            <p className="mt-1 text-lg font-semibold text-foreground">{failed}</p>
           </div>
         </div>
 
